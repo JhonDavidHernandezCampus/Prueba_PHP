@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'jhonhernandez/prueba_piloto_jhon-david-hernandez',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '5f649874497af20951041e984ab7ab649a97fa3f',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'bramus/router' => array(
-            'pretty_version' => '1.6',
-            'version' => '1.6.0.0',
-            'reference' => 'd2cf97d5c471e272ac5a2a88b652bc75089c8ae3',
+            'pretty_version' => '1.6.1',
+            'version' => '1.6.1.0',
+            'reference' => '55657b76da8a0a509250fb55b9dd24e1aa237eba',
             'type' => 'library',
             'install_path' => __DIR__ . '/../bramus/router',
             'aliases' => array(),
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'jhonhernandez/prueba_piloto_jhon-david-hernandez' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '5f649874497af20951041e984ab7ab649a97fa3f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

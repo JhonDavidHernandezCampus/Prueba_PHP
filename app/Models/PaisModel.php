@@ -30,7 +30,7 @@ class PaisModel{
     public function postPais(){
         try {
             $conx = new Conexion;
-            $query = 'INSERT INTO countries(id,name_country) VALUES (:id,:countries)';
+            $query = 'INSERT INTO pais(id,name_country) VALUES (:id,:countries)';
             $res = $conx->connect('mysql')->prepare($query);
             $res->bindValue('id',$this->id);
             $res->bindValue('countries', $this->name_country);
