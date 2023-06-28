@@ -19,7 +19,7 @@ class PaisController{
     public function postPais(){
         try {
             $_DATA = json_decode(file_get_contents('php://input'), true);
-            $obj = new PaisModel($_DATA['id'],$_DATA['name_country']);
+            $obj = new PaisModel($_DATA['idPais'],$_DATA['nombrePais']);
             $res = $obj->postPais();
             print_r( ["Stado"=> 200, "Mensage"=> "Se ha agregado el dato"]);
         } catch (\Throwable $th) {
@@ -29,7 +29,7 @@ class PaisController{
     public function updatePais(){
         try {
             $_DATA = json_decode(file_get_contents('php://input'), true);
-            $obj = new PaisModel($_DATA['id'],$_DATA['name_country']);
+            $obj = new PaisModel($_DATA['idPais'],$_DATA['nombrePais']);
             $res = $obj->updatePais();
             print_r( ["Stado"=> 200, "Mensage"=> "Se ha actualizado el dato"]);
         } catch (\Throwable $th) {
@@ -40,7 +40,7 @@ class PaisController{
     public function deletePais(){
         try {
             $_DATA = json_decode(file_get_contents('php://input'), true);
-            $obj = new PaisModel($_DATA['id']);
+            $obj = new PaisModel($_DATA['idPais']);
             $res = $obj->deletePais();
             print_r( ["Stado"=> 200, "Mensage"=> "Se ha eliminado el dato"]);
         } catch (\Throwable $th) {

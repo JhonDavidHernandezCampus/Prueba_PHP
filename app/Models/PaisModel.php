@@ -7,9 +7,9 @@ use PDO;
 
 class PaisModel{
     public $message;
-    public function __construct(private $id=1,public $name_country=1) {
-        $this->id = $id;
-        $this->name_country = $name_country;
+    public function __construct(private $idPais=1,public $nombrePais=1) {
+        $this->idPais = $idPais;
+        $this->nombrePais = $nombrePais;
     }
 
     public function getPais(){
@@ -30,10 +30,10 @@ class PaisModel{
     public function postPais(){
         try {
             $conx = new Conexion;
-            $query = 'INSERT INTO pais(id,name_country) VALUES (:id,:countries)';
+            $query = 'INSERT INTO pais(idPais,nombrePais) VALUES (:idPais,:nombrePais)';
             $res = $conx->connect('mysql')->prepare($query);
-            $res->bindValue('id',$this->id);
-            $res->bindValue('countries', $this->name_country);
+            $res->bindValue('idPais',$this->idPais);
+            $res->bindValue('nombrePais', $this->nombrePais);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -46,10 +46,10 @@ class PaisModel{
     public function updatePais(){
         try {
             $conx = new Conexion;
-            $query = 'UPDATE countries SET id=:id,name_country=:countries WHERE id=:id';
+            $query = 'UPDATE pais SET idPais=:idPais,nombrePais=:nombrePais WHERE idPais=:idPais';
             $res = $conx->connect('mysql')->prepare($query);
-            $res->bindValue('id',$this->id);
-            $res->bindValue('countries', $this->name_country);
+            $res->bindValue('idPais',$this->idPais);
+            $res->bindValue('nombrePais', $this->nombrePais);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -62,9 +62,9 @@ class PaisModel{
     public function deletePais(){
         try {
             $conx = new Conexion;
-            $query = 'DELETE FROM countries WHERE id=:id';
+            $query = 'DELETE FROM pais WHERE idPais=:idPais';
             $res = $conx->connect('mysql')->prepare($query);
-            $res->bindValue('id',$this->id);
+            $res->bindValue('idPais',$this->idPais);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {

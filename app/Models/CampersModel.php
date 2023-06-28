@@ -7,15 +7,18 @@ use PDO;
 
 class CampersModel{
     public $message;
-    public function __construct(private $id=1,public $name_country=1) {
-        $this->id = $id;
-        $this->name_country = $name_country;
+    public function __construct(private $idCampers=1,public $nombreCamper=1,public $apellidoCamper=1,public $fechaNac=1,public $fk_idReg=1) {
+        $this->idCampers = $idCampers;
+        $this->nombreCamper = $nombreCamper;
+        $this->apellidoCamper= $apellidoCamper;
+        $this->fechaNac = $fechaNac;
+        $this->fk_idReg = $fk_idReg;
     }
 
-    public function getPais(){
+    public function getCampers(){
         try {
             $conx = new Conexion;
-            $query = 'SELECT * FROM pais';
+            $query = 'SELECT * FROM campers';
             $res = $conx->connect('mysql')->prepare($query);
             $res->execute();
             return json_encode($res->fetchAll(PDO::FETCH_ASSOC));
@@ -27,13 +30,16 @@ class CampersModel{
         }
     }
 
-    public function postPais(){
+    public function postCampers(){
         try {
             $conx = new Conexion;
-            $query = 'INSERT INTO countries(id,name_country) VALUES (:id,:countries)';
+            $query = 'INSERT INTO campers(idCampers,nombreCamper,apellidoCamper,fechaNac,fk_idReg) VALUES (:idCampers,:nombreCamper,:apellidoCamper,:fechaNac,:fk_idReg)';
             $res = $conx->connect('mysql')->prepare($query);
-            $res->bindValue('id',$this->id);
-            $res->bindValue('countries', $this->name_country);
+            $res->bindValue('idCampers',$this->idCampers);
+            $res->bindValue('nombreCamper', $this->nombreCamper);
+            $res->bindValue('apellidoCamper', $this->apellidoCamper);
+            $res->bindValue('fechaNac', $this->fechaNac);
+            $res->bindValue('fk_idReg', $this->fk_idReg);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -43,13 +49,16 @@ class CampersModel{
         }
     }
 
-    public function updatePais(){
+    public function updateCampers(){
         try {
             $conx = new Conexion;
-            $query = 'UPDATE countries SET id=:id,name_country=:countries WHERE id=:id';
+            $query = 'UPDATE campers SET idCampers=:idCampers,nombreCamper=:nombreCamper,apellidoCamper=:apellidoCamper,fechaNac=:fechaNac,fk_idReg=:fk_idReg WHERE idCampers=:idCampers';
             $res = $conx->connect('mysql')->prepare($query);
-            $res->bindValue('id',$this->id);
-            $res->bindValue('countries', $this->name_country);
+            $res->bindValue('idCampers',$this->idCampers);
+            $res->bindValue('nombreCamper', $this->nombreCamper);
+            $res->bindValue('apellidoCamper', $this->apellidoCamper);
+            $res->bindValue('fechaNac', $this->fechaNac);
+            $res->bindValue('fk_idReg', $this->fk_idReg);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -59,12 +68,12 @@ class CampersModel{
         }
     }
 
-    public function deletePais(){
+    public function deleteCampers(){
         try {
             $conx = new Conexion;
-            $query = 'DELETE FROM countries WHERE id=:id';
+            $query = 'DELETE FROM campers WHERE idCampers=:idCampers';
             $res = $conx->connect('mysql')->prepare($query);
-            $res->bindValue('id',$this->id);
+            $res->bindValue('idCampers',$this->idCampers);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {

@@ -7,15 +7,16 @@ use PDO;
 
 class DepartamentoModel{
     public $message;
-    public function __construct(private $id=1,public $name_country=1) {
-        $this->id = $id;
-        $this->name_country = $name_country;
+    public function __construct(private $idDep=1,public $nombreDep=1, public $fk_idPais=1) {
+        $this->idDep = $idDep;
+        $this->nombreDep = $nombreDep;
+        $this->fk_idPais = $fk_idPais;
     }
 
-    public function getPais(){
+    public function getDepartamento(){
         try {
             $conx = new Conexion;
-            $query = 'SELECT * FROM pais';
+            $query = 'SELECT * FROM departamento';
             $res = $conx->connect('mysql')->prepare($query);
             $res->execute();
             return json_encode($res->fetchAll(PDO::FETCH_ASSOC));
@@ -27,13 +28,14 @@ class DepartamentoModel{
         }
     }
 
-    public function postPais(){
+    public function postDepartamento(){
         try {
             $conx = new Conexion;
-            $query = 'INSERT INTO countries(id,name_country) VALUES (:id,:countries)';
+            $query = 'INSERT INTO departamento(idDep,nombreDep,fk_idPais) VALUES (:idDep,:nombreDep,:fk_idPais)';
             $res = $conx->connect('mysql')->prepare($query);
-            $res->bindValue('id',$this->id);
-            $res->bindValue('countries', $this->name_country);
+            $res->bindValue('idDep',$this->idDep);
+            $res->bindValue('nombreDep', $this->nombreDep);
+            $res->bindValue('fk_idPais', $this->fk_idPais);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -43,13 +45,14 @@ class DepartamentoModel{
         }
     }
 
-    public function updatePais(){
+    public function updateDepartamento(){
         try {
             $conx = new Conexion;
-            $query = 'UPDATE countries SET id=:id,name_country=:countries WHERE id=:id';
+            $query = 'UPDATE departamento SET idDep=:idDep,nombreDep=:nombreDep,fk_idPais=:fk_idPais WHERE idDep=:idDep';
             $res = $conx->connect('mysql')->prepare($query);
-            $res->bindValue('id',$this->id);
-            $res->bindValue('countries', $this->name_country);
+            $res->bindValue('idDep',$this->idDep);
+            $res->bindValue('nombreDep', $this->nombreDep);
+            $res->bindValue('fk_idPais', $this->fk_idPais);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -59,12 +62,12 @@ class DepartamentoModel{
         }
     }
 
-    public function deletePais(){
+    public function deleteDepartamento(){
         try {
             $conx = new Conexion;
-            $query = 'DELETE FROM countries WHERE id=:id';
+            $query = 'DELETE FROM departamento WHERE idDep=:idDep';
             $res = $conx->connect('mysql')->prepare($query);
-            $res->bindValue('id',$this->id);
+            $res->bindValue('idDep',$this->idDep);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {

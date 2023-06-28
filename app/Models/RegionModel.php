@@ -7,15 +7,16 @@ use PDO;
 
 class RegionModel{
     public $message;
-    public function __construct(private $id=1,public $name_country=1) {
-        $this->id = $id;
-        $this->name_country = $name_country;
+    public function __construct(private $idReg=1,public $nombreReg=1, public $fk_idDep=1) {
+        $this->idReg = $idReg;
+        $this->nombreReg = $nombreReg;
+        $this->fk_idDep = $fk_idDep;
     }
 
-    public function getPais(){
+    public function getRegion(){
         try {
             $conx = new Conexion;
-            $query = 'SELECT * FROM pais';
+            $query = 'SELECT * FROM region';
             $res = $conx->connect('mysql')->prepare($query);
             $res->execute();
             return json_encode($res->fetchAll(PDO::FETCH_ASSOC));
@@ -27,13 +28,14 @@ class RegionModel{
         }
     }
 
-    public function postPais(){
+    public function postRegion(){
         try {
             $conx = new Conexion;
-            $query = 'INSERT INTO countries(id,name_country) VALUES (:id,:countries)';
+            $query = 'INSERT INTO region(idReg,nombreReg,fk_idDep) VALUES (:idReg,:nombreReg,:fk_idDep)';
             $res = $conx->connect('mysql')->prepare($query);
-            $res->bindValue('id',$this->id);
-            $res->bindValue('countries', $this->name_country);
+            $res->bindValue('idReg',$this->idReg);
+            $res->bindValue('nombreReg', $this->nombreReg);
+            $res->bindValue('fk_idDep', $this->fk_idDep);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -43,13 +45,14 @@ class RegionModel{
         }
     }
 
-    public function updatePais(){
+    public function updateRegion(){
         try {
             $conx = new Conexion;
-            $query = 'UPDATE countries SET id=:id,name_country=:countries WHERE id=:id';
+            $query = 'UPDATE region SET idReg=:idReg,nombreReg=:nombreReg, fk_idDep=:fk_idDep WHERE idReg=:idReg';
             $res = $conx->connect('mysql')->prepare($query);
-            $res->bindValue('id',$this->id);
-            $res->bindValue('countries', $this->name_country);
+            $res->bindValue('idReg',$this->idReg);
+            $res->bindValue('nombreReg', $this->nombreReg);
+            $res->bindValue('fk_idDep', $this->fk_idDep);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
@@ -59,12 +62,12 @@ class RegionModel{
         }
     }
 
-    public function deletePais(){
+    public function deleteRegion(){
         try {
             $conx = new Conexion;
-            $query = 'DELETE FROM countries WHERE id=:id';
+            $query = 'DELETE FROM region WHERE idReg=:idReg';
             $res = $conx->connect('mysql')->prepare($query);
-            $res->bindValue('id',$this->id);
+            $res->bindValue('idReg',$this->idReg);
             $res->execute();
             $this->message =["Code"=> 200, "Message"=> $res->fetchAll(PDO::FETCH_ASSOC)];
         } catch (\PDOException $e) {
